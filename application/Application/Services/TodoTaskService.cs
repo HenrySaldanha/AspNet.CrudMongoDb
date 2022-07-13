@@ -22,7 +22,7 @@ public class TodoTaskService : ITodoTaskService
 
     public async Task DeleteAsync(Guid id)
     {
-       await _taskWriteRepository.DeleteAsync(id);
+        await _taskWriteRepository.DeleteAsync(id);
     }
 
     public async Task<TodoTask> GetAsync(Guid id)

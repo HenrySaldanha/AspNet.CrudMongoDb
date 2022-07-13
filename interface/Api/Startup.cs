@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api;
-    public class Startup
-    {
+public class Startup
+{
     public IConfiguration Configuration { get; }
 
     public Startup(IConfiguration configuration)
