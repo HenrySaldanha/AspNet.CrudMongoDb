@@ -22,28 +22,21 @@ public class TodoTaskService : ITodoTaskService
         return await _taskWriteRepository.CreateAsync(task);
     }
 
-    public async Task DeleteAsync(Guid id)
-    {
+    public async Task DeleteAsync(Guid id) =>
         await _taskWriteRepository.DeleteAsync(id);
-    }
 
     public async Task FinishTaskAsync(Guid id)
     {
         var todoTask = await _taskReadRepository.GetAsync(id);
-        todoTask.FinishDate = DateTime.UtcNow;
-        todoTask.IsDone = true;
-        await _taskWriteRepository.UpdateAsync(todoTask);
+        if (!todoTask.IsDone)
+            await _taskWriteRepository.UpdateAsync(id, DateTime.UtcNow, true);
     }
 
-    public async Task<TodoTask> GetAsync(Guid id)
-    {
-        return await _taskReadRepository.GetAsync(id);
-    }
+    public async Task<TodoTask> GetAsync(Guid id) =>
+        await _taskReadRepository.GetAsync(id);
 
-    public async Task<IEnumerable<TodoTask>> GetAsync()
-    {
-        return await _taskReadRepository.GetAsync();
-    }
+    public async Task<IEnumerable<TodoTask>> GetAsync() =>
+        await _taskReadRepository.GetAsync();
 
     public async Task UpdateAsync(Guid id, TodoTask task)
     {
