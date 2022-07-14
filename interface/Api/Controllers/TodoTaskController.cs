@@ -21,7 +21,7 @@ public class TodoTaskController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(TodoTaskResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> CreateAsync(CreateOrUpdateTodoTaskRequest task)
+    public async Task<ActionResult> CreateAsync(CreateTodoTaskRequest task)
     {
         var response = await _taskService.CreateAsync(task);
 
@@ -39,9 +39,9 @@ public class TodoTaskController : ControllerBase
         return NoContent();
     }
 
-    [HttpPatch("{id}")]
+    [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<ActionResult> UpdateAsync(Guid id, [FromBody] CreateOrUpdateTodoTaskRequest task)
+    public async Task<ActionResult> UpdateAsync(Guid id, [FromBody] UpdateTodoTaskRequest task)
     {
         await _taskService.UpdateAsync(id, task);
         return NoContent();
