@@ -11,19 +11,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{D05C61
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "interface", "interface", "{5B7BEBD0-8F6C-44E9-A248-95056BC33E15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "interface\Api\Api.csproj", "{557FF2E4-A179-4D63-8336-0914CE2DFCB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "interface\Api\Api.csproj", "{557FF2E4-A179-4D63-8336-0914CE2DFCB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dependencies", "infra\Dependencies\Dependencies.csproj", "{672A424A-55C3-4FA9-9964-FFA6D9613762}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dependencies", "infra\Dependencies\Dependencies.csproj", "{672A424A-55C3-4FA9-9964-FFA6D9613762}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "domain\Domain\Domain.csproj", "{AEF454A0-F7A1-47FF-A05E-168743C7E784}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "domain\Domain\Domain.csproj", "{AEF454A0-F7A1-47FF-A05E-168743C7E784}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "infra\Repository\Repository.csproj", "{FAE225CE-ED23-4A9F-B8CF-FC040A4C17CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "infra\Repository\Repository.csproj", "{FAE225CE-ED23-4A9F-B8CF-FC040A4C17CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.MongoDb", "infra\Repository.MongoDb\Repository.MongoDb.csproj", "{2B2AF0CF-22B8-4C73-B050-149FB188F280}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository.MongoDb", "infra\Repository.MongoDb\Repository.MongoDb.csproj", "{2B2AF0CF-22B8-4C73-B050-149FB188F280}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection", "infra\DependencyInjection\DependencyInjection.csproj", "{53A26E55-6FF3-45D5-A201-BDE163AD7091}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInjection", "infra\DependencyInjection\DependencyInjection.csproj", "{53A26E55-6FF3-45D5-A201-BDE163AD7091}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "application\Application\Application.csproj", "{AE58A288-143D-4F50-80A8-9645DD1A7499}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "application\Application\Application.csproj", "{AE58A288-143D-4F50-80A8-9645DD1A7499}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{1FF4E1A0-E18F-4AB3-99AD-6EE41DFD6581}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
