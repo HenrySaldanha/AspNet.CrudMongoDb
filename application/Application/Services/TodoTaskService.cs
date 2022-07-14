@@ -16,13 +16,23 @@ public class TodoTaskService : ITodoTaskService
 
     public async Task<TodoTask> CreateAsync(TodoTask task)
     {
-        task.Id = Guid.NewGuid();
+        if (task is null)
+            return null;
+
         return await _taskWriteRepository.CreateAsync(task);
     }
 
     public async Task DeleteAsync(Guid id)
     {
         await _taskWriteRepository.DeleteAsync(id);
+    }
+
+    public async Task FinishTaskAsync(Guid id)
+    {
+        var todoTask = await _taskReadRepository.GetAsync(id);
+        todoTask.FinishDate = DateTime.UtcNow;
+        todoTask.IsDone = true;
+        await _taskWriteRepository.UpdateAsync(todoTask);
     }
 
     public async Task<TodoTask> GetAsync(Guid id)
@@ -35,8 +45,9 @@ public class TodoTaskService : ITodoTaskService
         return await _taskReadRepository.GetAsync();
     }
 
-    public async Task<TodoTask> UpdateAsync(TodoTask task)
+    public async Task UpdateAsync(Guid id, TodoTask task)
     {
-        return await _taskWriteRepository.UpdateAsync(task);
+        task.Id = id;
+        await _taskWriteRepository.UpdateAsync(task);
     }
 }
