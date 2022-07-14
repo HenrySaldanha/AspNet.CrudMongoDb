@@ -12,14 +12,11 @@ public class TodoTaskReadRepository : ITodoTaskReadRepository
         _taskRepository = context.GetDatabase().GetCollection<Domain.TodoTask>("Tasks");
     }
 
-    public async Task<Domain.TodoTask> GetAsync(Guid id)
-    {
-        return (await _taskRepository.Find(a => a.Id == id).ToListAsync())
-                .FirstOrDefault();
-    }
+    public async Task<Domain.TodoTask> GetAsync(Guid id) =>
+        await _taskRepository.Find(a => a.Id == id).SingleOrDefaultAsync();
 
-    public async Task<IEnumerable<Domain.TodoTask>> GetAsync()
-    {
-        return await _taskRepository.Find(a => true).ToListAsync();
-    }
+
+    public async Task<IEnumerable<Domain.TodoTask>> GetAsync() =>
+        await _taskRepository.Find(a => true).ToListAsync();
+
 }
