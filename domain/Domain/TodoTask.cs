@@ -10,5 +10,10 @@ public class TodoTask
     public bool IsDone { get; set; }
     public DateTime CreationDate { get; set; }
     public DateTime? FinishDate { get; set; }
-    public IEnumerable<TodoTask>? Chields { get; set; }
+    public IEnumerable<SubTask>? Chields { get; set; }
+}
+public class SubTask
+{
+    public string Description { get; set; }
+    public IEnumerable<SubTask>? Chields { get; set; }
 }
