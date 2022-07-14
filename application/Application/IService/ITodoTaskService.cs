@@ -3,9 +3,10 @@
 namespace Application.IService;
 public interface ITodoTaskService
 {
-    public Task<TodoTask> GetAsync(Guid id);
-    public Task<IEnumerable<TodoTask>> GetAsync();
-    public Task<TodoTask> CreateAsync(TodoTask task);
-    public Task<TodoTask> UpdateAsync(TodoTask task);
-    public Task DeleteAsync(Guid id);
+    Task<TodoTask> GetAsync(Guid id);
+    Task<IEnumerable<TodoTask>> GetAsync();
+    Task<TodoTask> CreateAsync(TodoTask task);
+    Task UpdateAsync(Guid id, TodoTask task);
+    Task DeleteAsync(Guid id);
+    Task FinishTaskAsync(Guid id);
 }
