@@ -1,4 +1,6 @@
-﻿using Application.IService;
+﻿using Api.Models.Request;
+using Api.Models.Response;
+using Application.IService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -17,35 +19,55 @@ public class TodoTaskController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult> Create(Domain.TodoTask task)
+    [ProducesResponseType(typeof(TodoTaskResponse), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> CreateAsync(CreateOrUpdateTodoTaskRequest task)
     {
-        await _taskService.CreateAsync(task);
-        return Ok(task);
+        var response = await _taskService.CreateAsync(task);
+
+        if (response is null)
+            return BadRequest();
+
+        return Created(nameof(CreateAsync), (TodoTaskResponse)response);
     }
 
-    [HttpPatch]
-    public async Task<ActionResult> Update(Domain.TodoTask task)
+    [HttpPost("{id}/finish")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<ActionResult> FinishTaskAsync(Guid id)
     {
-        await _taskService.UpdateAsync(task);
-        return Ok(task);
+        await _taskService.FinishTaskAsync(id);
+        return NoContent();
+    }
+
+    [HttpPatch("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<ActionResult> UpdateAsync(Guid id, [FromBody] CreateOrUpdateTodoTaskRequest task)
+    {
+        await _taskService.UpdateAsync(id, task);
+        return NoContent();
     }
 
     [HttpGet]
+    [ProducesResponseType(typeof(List<TodoTaskResponse>), StatusCodes.Status200OK)]
     public async Task<ActionResult> GetAll()
     {
-        return Ok(await _taskService.GetAsync());
+        var response = await _taskService.GetAsync();
+        return Ok(response.Select(c=>(TodoTaskResponse)c));
     }
 
     [HttpGet("{id}")]
+    [ProducesResponseType(typeof(TodoTaskResponse), StatusCodes.Status200OK)]
     public async Task<ActionResult> Get(Guid id)
     {
-        return Ok(await _taskService.GetAsync(id));
+        var response = await _taskService.GetAsync(id);
+        return Ok((TodoTaskResponse)response);
     }
 
     [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<ActionResult> Delete(Guid id)
     {
         await _taskService.DeleteAsync(id);
-        return Ok();
+        return NoContent();
     }
 }
