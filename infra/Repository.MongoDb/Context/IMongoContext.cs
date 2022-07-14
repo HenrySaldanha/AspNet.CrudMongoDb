@@ -4,6 +4,6 @@ namespace Repository.MongoDb.Context
 {
     public interface IMongoContext
     {
-        public IMongoDatabase GetDatabase();
+        IMongoDatabase GetDatabase();
     }
 }

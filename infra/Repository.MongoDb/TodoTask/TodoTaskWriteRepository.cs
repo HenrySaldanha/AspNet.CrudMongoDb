@@ -23,9 +23,8 @@ public class TodoTaskWriteRepository : ITodoTaskWriteRepository
         await _taskRepository.DeleteOneAsync(a => a.Id == id);
     }
 
-    public async Task<Domain.TodoTask> UpdateAsync(Domain.TodoTask task)
+    public async Task UpdateAsync(Domain.TodoTask task)
     {
         await _taskRepository.ReplaceOneAsync(a => a.Id == task.Id, task);
-        return task;
     }
 }
