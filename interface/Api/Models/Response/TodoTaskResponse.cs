@@ -8,7 +8,7 @@ public class TodoTaskResponse
     public bool IsDone { get; set; }
     public DateTime CreationDate { get; set; }
     public DateTime? FinishDate { get; set; }
-    public IEnumerable<TodoTaskResponse>? Chields { get; set; }
+    public IEnumerable<SubTaskResponse>? Chields { get; set; }
 
     public static implicit operator TodoTaskResponse(TodoTask task)
     {
@@ -22,7 +22,25 @@ public class TodoTaskResponse
             IsDone = task.IsDone,
             CreationDate = task.CreationDate,
             FinishDate = task.FinishDate,
-            Chields = task.Chields?.Select(c => (TodoTaskResponse)c)
+            Chields = task.Chields?.Select(c => (SubTaskResponse)c)
+        };
+    }
+}
+
+public class SubTaskResponse
+{
+    public string Description { get; set; }
+    public IEnumerable<SubTaskResponse>? Chields { get; set; }
+
+    public static implicit operator SubTaskResponse(SubTask task)
+    {
+        if (task is null)
+            return null;
+
+        return new SubTaskResponse
+        {
+            Description = task.Description,
+            Chields = task.Chields?.Select(c => (SubTaskResponse)c)
         };
     }
 }
