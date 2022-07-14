@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using Repository.MongoDb.Context;
 using Repository.TodoTask;
 
@@ -26,5 +27,14 @@ public class TodoTaskWriteRepository : ITodoTaskWriteRepository
     public async Task UpdateAsync(Domain.TodoTask task)
     {
         await _taskRepository.ReplaceOneAsync(a => a.Id == task.Id, task);
+    }
+    public async Task UpdateAsync(Guid id, DateTime finishTask, bool isDone)
+    {
+        var filter = Builders<Domain.TodoTask>.Filter.Eq(nameof(Domain.TodoTask.Id), id);
+        var update = Builders<Domain.TodoTask>.Update
+            .Set(nameof(Domain.TodoTask.IsDone), isDone)
+            .Set(nameof(Domain.TodoTask.FinishDate), finishTask);
+
+        await _taskRepository.UpdateOneAsync(filter, update);
     }
 }
