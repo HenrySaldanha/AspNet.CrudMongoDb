@@ -1,7 +1,7 @@
 ﻿namespace Repository.TodoTask;
 public interface ITodoTaskWriteRepository
 {
-    public Task<Domain.TodoTask> CreateAsync(Domain.TodoTask task);
-    public Task<Domain.TodoTask> UpdateAsync(Domain.TodoTask task);
-    public Task DeleteAsync(Guid id);
+    Task<Domain.TodoTask> CreateAsync(Domain.TodoTask task);
+    Task UpdateAsync(Domain.TodoTask task);
+    Task DeleteAsync(Guid id);
 }
